@@ -5,18 +5,6 @@ const InputForm = ({ book, addToPhoneBook }) => {
   const [lastName, setLastName] = useState('DefaultValues');
   const [phoneNumber, setPhoneNumber] = useState('9999999');
 
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-  };
-
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  };
-
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
   const addToTable = (e) => {
     e.preventDefault();
 
@@ -36,7 +24,7 @@ const InputForm = ({ book, addToPhoneBook }) => {
         <input
           value={firstName}
           placeholder="First Name"
-          onChange={handleFirstNameChange}
+          onChange={(e) => setFirstName(e.target.value)}
           type="text"
           name="firstName"
         ></input>
@@ -44,7 +32,7 @@ const InputForm = ({ book, addToPhoneBook }) => {
         <input
           value={lastName}
           placeholder="Last Name"
-          onChange={handleLastNameChange}
+          onChange={(e) => setLastName(e.target.value)}
           type="text"
           name="lastName"
         ></input>
@@ -52,7 +40,7 @@ const InputForm = ({ book, addToPhoneBook }) => {
         <input
           value={phoneNumber}
           placeholder="Phone Number"
-          onChange={handlePhoneNumberChange}
+          onChange={(e) => setPhoneNumber(e.target.value)}
           type="text"
           name="phoneNumber"
         ></input>
