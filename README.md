@@ -1,5 +1,5 @@
 # A Phonebook
 
-![alt text](https://github.com/dufferzz/phonebook/tree/main/screenshot.png?raw=true)
+![Screenshot](screenshot.png?raw=true 'App Screenshot')
 
 Bonus points: not using refs stupidly, reducer
