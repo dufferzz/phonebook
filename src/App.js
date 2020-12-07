@@ -1,4 +1,5 @@
 import React, { useState, useReducer } from 'react';
+import './styles.css';
 
 const InputForm = ({ book, addToPhoneBook }) => {
   const formReducer = (state, action) => {
@@ -15,7 +16,7 @@ const InputForm = ({ book, addToPhoneBook }) => {
           phoneNumber: '',
           formError: false,
         };
-      case 'invalid-form':
+      case 'invalidForm':
         return {
           ...state,
           formError: true,
@@ -34,14 +35,12 @@ const InputForm = ({ book, addToPhoneBook }) => {
   };
 
   const [state, dispatch] = useReducer(formReducer, initialState);
-
   const { firstName, lastName, phoneNumber, formError } = state;
 
   const addToTable = (e) => {
     e.preventDefault();
-
     if (firstName === '' || lastName === '' || phoneNumber === '') {
-      dispatch({ type: 'invalid-form' });
+      dispatch({ type: 'invalidForm' });
       return;
     }
     addToPhoneBook([...book, { firstName, lastName, phoneNumber }]);
@@ -49,7 +48,7 @@ const InputForm = ({ book, addToPhoneBook }) => {
   };
 
   return (
-    <div>
+    <div className="inputForm">
       <form onSubmit={addToTable}>
         <input
           value={firstName}
@@ -93,8 +92,10 @@ const InputForm = ({ book, addToPhoneBook }) => {
           name="phoneNumber"
         ></input>
         {formError && (
-          <div style={{ color: 'red', fontWeight: 'bold' }}>
-            Please input all fields!
+          <div
+            style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}
+          >
+            Please fill in all fields!
           </div>
         )}
         <div>
@@ -123,7 +124,7 @@ const Table = ({ data }) => {
   });
 
   return (
-    <table>
+    <table className="phoneBookTable">
       <thead>
         <tr>
           <td>First name</td>
@@ -132,6 +133,13 @@ const Table = ({ data }) => {
         </tr>
       </thead>
       <tbody>
+        {sortedTable.length === 0 && (
+          <tr>
+            <td style={{ color: 'gray' }} colSpan="3">
+              No Data
+            </td>
+          </tr>
+        )}
         {sortedTable.map((person, index) => (
           <BookItem key={index} person={person} />
         ))}
@@ -143,9 +151,16 @@ const Table = ({ data }) => {
 const App = () => {
   const [phoneBook, addToPhoneBook] = useState([]);
   return (
-    <div>
-      <InputForm book={phoneBook} addToPhoneBook={addToPhoneBook} />
-      <Table data={phoneBook} />
+    <div className="container">
+      <div className="card">
+        <div className="header">
+          Super Amazing Phone Book{' '}
+          {phoneBook.length > 0 && `(${phoneBook.length})`}
+        </div>
+        <Table data={phoneBook} />
+        <InputForm book={phoneBook} addToPhoneBook={addToPhoneBook} />
+        <div className="footer">Last Updated: 03:00 - 07 Dec 2020</div>
+      </div>
     </div>
   );
 };

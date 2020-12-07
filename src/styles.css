@@ -1,0 +1,83 @@
+.phoneBookTable {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #aaa;
+  margin-bottom: 1rem;
+}
+
+thead {
+  background-color: rgba(137, 195, 235, 1);
+  padding: 0.2rem;
+  font-size: 1.15rem;
+}
+
+tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.container {
+  font-family: 'Open Sans', sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: radial-gradient(
+    rgba(235, 241, 246, 1) 0%,
+    rgba(171, 211, 238, 1) 50%,
+    rgba(137, 195, 235, 1) 51%,
+    rgba(213, 235, 251, 1) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 ); /* IE6-9 */
+}
+.card {
+  border: 1px solid #aaa;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  background: white;
+}
+
+input[type='text'] {
+  padding: 0.3rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  outline: none;
+}
+
+input[type='text']:focus,
+textarea:focus {
+  box-shadow: 0 0 5px rgba(137, 195, 235, 1);
+  border: 1px solid rgba(137, 195, 235, 1);
+}
+button {
+  margin-top: 0.5rem;
+  width: 100%;
+  background-color: inherit;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 0.7rem;
+  outline: none;
+}
+
+button:hover {
+  background-color: rgba(137, 195, 235, 1);
+  transition: background-color 0.2s ease-in;
+}
+
+.header {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+}
+tr {
+  padding: 1rem;
+}
+.footer {
+  width: 100%;
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+}
