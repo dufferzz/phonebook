@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import './styles.css';
 
 const InputForm = ({ book, addToPhoneBook }) => {
@@ -27,6 +27,11 @@ const InputForm = ({ book, addToPhoneBook }) => {
     return state;
   };
 
+  let firstNameInput = null;
+  useEffect(() => {
+    firstNameInput.focus();
+  });
+
   const initialState = {
     firstName: 'some',
     lastName: 'defaultValues',
@@ -51,6 +56,9 @@ const InputForm = ({ book, addToPhoneBook }) => {
     <div className="inputForm">
       <form onSubmit={addToTable}>
         <input
+          ref={(x) => {
+            firstNameInput = x;
+          }}
           value={firstName}
           placeholder="First Name"
           onChange={(e) =>
