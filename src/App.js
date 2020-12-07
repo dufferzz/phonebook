@@ -1,21 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 
 const InputForm = ({ book, addToPhoneBook }) => {
-  const [firstName, setFirstName] = useState('Some');
-  const [lastName, setLastName] = useState('DefaultValues');
-  const [phoneNumber, setPhoneNumber] = useState('9999999');
+  const formReducer = (state, action) => {
+    switch (action.type) {
+      case 'setField':
+        return {
+          ...state,
+          [action.field]: action.value,
+        };
+      case 'cleanForm':
+        return {
+          firstName: '',
+          lastName: '',
+          phoneNumber: '',
+          formError: false,
+        };
+      case 'invalid-form':
+        return {
+          ...state,
+          formError: true,
+        };
+      default:
+        break;
+    }
+    return state;
+  };
+
+  const initialState = {
+    firstName: 'some',
+    lastName: 'defaultValues',
+    phoneNumber: '96880514',
+    formError: false,
+  };
+
+  const [state, dispatch] = useReducer(formReducer, initialState);
+
+  const { firstName, lastName, phoneNumber, formError } = state;
 
   const addToTable = (e) => {
     e.preventDefault();
 
     if (firstName === '' || lastName === '' || phoneNumber === '') {
-      alert('Please suppply all values!');
+      dispatch({ type: 'invalid-form' });
       return;
     }
     addToPhoneBook([...book, { firstName, lastName, phoneNumber }]);
-    setLastName('');
-    setFirstName('');
-    setPhoneNumber('');
+    dispatch({ type: 'cleanForm' });
   };
 
   return (
@@ -24,7 +54,13 @@ const InputForm = ({ book, addToPhoneBook }) => {
         <input
           value={firstName}
           placeholder="First Name"
-          onChange={(e) => setFirstName(e.target.value)}
+          onChange={(e) =>
+            dispatch({
+              type: 'setField',
+              field: 'firstName',
+              value: e.target.value,
+            })
+          }
           type="text"
           name="firstName"
         ></input>
@@ -32,7 +68,13 @@ const InputForm = ({ book, addToPhoneBook }) => {
         <input
           value={lastName}
           placeholder="Last Name"
-          onChange={(e) => setLastName(e.target.value)}
+          onChange={(e) =>
+            dispatch({
+              type: 'setField',
+              field: 'lastName',
+              value: e.target.value,
+            })
+          }
           type="text"
           name="lastName"
         ></input>
@@ -40,12 +82,24 @@ const InputForm = ({ book, addToPhoneBook }) => {
         <input
           value={phoneNumber}
           placeholder="Phone Number"
-          onChange={(e) => setPhoneNumber(e.target.value)}
+          onChange={(e) =>
+            dispatch({
+              type: 'setField',
+              field: 'phoneNumber',
+              value: e.target.value,
+            })
+          }
           type="text"
           name="phoneNumber"
         ></input>
-
-        <button>Add</button>
+        {formError && (
+          <div style={{ color: 'red', fontWeight: 'bold' }}>
+            Please input all fields!
+          </div>
+        )}
+        <div>
+          <button>Add</button>
+        </div>
       </form>
     </div>
   );
