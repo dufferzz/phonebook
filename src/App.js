@@ -1,7 +1,8 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer } from 'react';
 import './styles.css';
 
 const InputForm = ({ book, addToPhoneBook }) => {
+  let firstNameInput = null;
   const formReducer = (state, action) => {
     switch (action.type) {
       case 'setField':
@@ -26,12 +27,6 @@ const InputForm = ({ book, addToPhoneBook }) => {
     }
     return state;
   };
-
-  let firstNameInput = null;
-  useEffect(() => {
-    firstNameInput.focus();
-  });
-
   const initialState = {
     firstName: 'some',
     lastName: 'defaultValues',
@@ -50,12 +45,14 @@ const InputForm = ({ book, addToPhoneBook }) => {
     }
     addToPhoneBook([...book, { firstName, lastName, phoneNumber }]);
     dispatch({ type: 'cleanForm' });
+    firstNameInput.focus();
   };
 
   return (
     <div className="inputForm">
       <form onSubmit={addToTable}>
         <input
+          autoFocus={true}
           ref={(x) => {
             firstNameInput = x;
           }}
