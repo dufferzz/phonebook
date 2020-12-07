@@ -14,6 +14,7 @@ thead {
 
 tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
 }
 .container {
   font-family: 'Open Sans', sans-serif;
@@ -46,13 +47,19 @@ input[type='text'] {
   outline: none;
 }
 
+input[type='text']:hover {
+  box-shadow: 0 0 5px rgba(137, 195, 235, 1);
+  transition: box-shadow 0.2s;
+}
+
 input[type='text']:focus,
 textarea:focus {
   box-shadow: 0 0 5px rgba(137, 195, 235, 1);
   border: 1px solid rgba(137, 195, 235, 1);
+  transition: box-shadow 0.2s;
 }
 button {
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   width: 100%;
   background-color: inherit;
   border: 1px solid #aaa;
@@ -63,8 +70,9 @@ button {
 }
 
 button:hover {
-  background-color: rgba(137, 195, 235, 1);
-  transition: background-color 0.2s ease-in;
+  box-shadow: 0 0 7px rgba(137, 195, 235, 1);
+  border: 1px solid rgba(137, 195, 235, 1);
+  transition: box-shadow 0.2s;
 }
 
 .header {

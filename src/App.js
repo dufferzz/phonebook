@@ -159,7 +159,7 @@ const App = () => {
         </div>
         <Table data={phoneBook} />
         <InputForm book={phoneBook} addToPhoneBook={addToPhoneBook} />
-        <div className="footer">Last Updated: 03:00 - 07 Dec 2020</div>
+        <div className="footer">Last Updated: 16:00 - 07 Dec 2020</div>
       </div>
     </div>
   );
