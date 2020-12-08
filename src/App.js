@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import './styles.css';
 
 const InputForm = ({ book, addToPhoneBook }) => {
@@ -47,6 +47,11 @@ const InputForm = ({ book, addToPhoneBook }) => {
     dispatch({ type: 'cleanForm' });
     firstNameInput.focus();
   };
+
+  //Whenever 'book' changes, save to LocalStorage
+  useEffect(() => {
+    localStorage.setItem('phoneBook', JSON.stringify(book));
+  }, [book]);
 
   return (
     <div className="inputForm">
@@ -154,7 +159,14 @@ const Table = ({ data }) => {
 };
 
 const App = () => {
-  const [phoneBook, addToPhoneBook] = useState([]);
+  let tempState = null;
+  if (localStorage.getItem('phoneBook') === null) {
+    tempState = [];
+  } else {
+    tempState = JSON.parse(localStorage.getItem('phoneBook'));
+  }
+
+  const [phoneBook, addToPhoneBook] = useState(tempState);
   return (
     <div className="container">
       <div className="card">
@@ -164,7 +176,7 @@ const App = () => {
         </div>
         <Table data={phoneBook} />
         <InputForm book={phoneBook} addToPhoneBook={addToPhoneBook} />
-        <div className="footer">Last Updated: 17:10 - 07 Dec 2020</div>
+        <div className="footer">Last Updated: 00:30 - 09 Dec 2020</div>
       </div>
     </div>
   );
